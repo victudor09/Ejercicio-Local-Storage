@@ -1,50 +1,36 @@
-//Práctica de clase: PDF Teoría
-
-/* const yourname = document.getElementById('firstName')
-
-const submitBtn= document.getElementById('sendButton')
-
-console.log(yourname);
-
-console.log(submitBtn);
-
-function onSubmit(event) {
-    event.preventDefault() //para evitar que recargue pag y pierda datos..
-    const result = yourname.value
-    localStorage.setItem('username', result)
-    console.log(result)
-}
-
-submitBtn.addEventListener('click', onSubmit) */
-
-//const userName = JSON.parse(localStorage.getItem('userName'))
-//No funciona el parseo porque el valor introducido es string, pero en
-//elementos más complejos si se necesita.
-
-
 // EJERCICIO ENTREGABLE LOCAL STORAGE
 
 const userName = document.getElementById('userName')
-const userAge = document.getElementById('userAge')
-const submitButton = document.getElementById('submitBtn')
+const userEmail = document.getElementById('userEmail')
+const userMessage = document.getElementById('userMessage')
+const submitButton = document.getElementById('submitButton')
+const showUser = document.getElementById('showUser')
 
-console.log(userName, userAge, submitButton);
-
+//Guardar datos local storage
 function onSubmit(event) {
     event.preventDefault()
-    const usernameValue = userName.value
-    const userageValue = userAge.value
+    
+//Llama a la funcion que Guarda usuario
+    saveDataStorage()
 
-    savedataStarage () {
-        
-    }
-    const userData {
-        userName: usernameValue
-        userAge: userageValue
-    }
+//Llama a la funcion que muestra usuario
+    showDataStorage()
+}
 
-    localStorage.setItem('userData', userData)
-    console.log('pasan cosas', usernameValue, userageValue)
+//Funcion guarda usuario
+function saveDataStorage(){
+    const userData = {
+        userName: userName.value,
+        userEmail: userEmail.value,
+        userMessage: userMessage.value
+    }
+    localStorage.setItem('userData', JSON.stringify(userData))
+}
+
+//Funcion Muestra usuario
+function showDataStorage() {
+    const userDataFromStorage = JSON.parse(localStorage.getItem('userData'))
+    showUser.innerHTML = `${userDataFromStorage.userName}, ${userDataFromStorage.userEmail}, ${userDataFromStorage.userMessage}`
 }
 
 submitButton.addEventListener('click', onSubmit)
